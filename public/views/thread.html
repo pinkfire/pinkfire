@@ -1,0 +1,16 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        {{ thread.application }} <span class="pull-right">{{ thread.id }}</span>
+    </div>
+
+    <div class="panel-body">
+        {{ thread.message }}
+
+        <div ng-if="withParents(thread.id)">
+            <hr />
+            <ul style="list-style: none">
+                <li ng-repeat="thread in withParents(thread.id)" ng-include="'views/thread.html'"></li>
+            </ul>
+        </div>
+    </div>
+</div>
