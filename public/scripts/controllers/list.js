@@ -3,14 +3,14 @@
 angular
     .module('sossoaApp')
     .controller('ListCtrl', function($scope) {
-        $scope.threads = [];
+        $scope.threads = {};
 
-        $scope.withParents = function(val) {
-            var res = [];
+        $scope.findByParent = function(val) {
+            var res = {};
 
-            $scope.threads.forEach(function(thread) {
+            angular.forEach($scope.threads, function(thread, key) {
                 if (thread.parent === val) {
-                    res.push(thread);
+                    res[key] = thread;
                 }
             });
 
@@ -19,11 +19,30 @@ angular
 
         var socket = io();
         socket.on('threads', function(thread) {
-            console.log(thread);
+            var paths = thread.path.split('/');
 
             thread.date = new Date();
+            thread.id = paths[paths.length-1];
+            thread.parent = paths[paths.length-2];
 
-            $scope.threads.push(thread);
+            // Check the complete path exists
+            for (var i = 1; i < paths.length-1; i++) {
+                var parent = paths[i-1],
+                    current = paths[i];
+
+                if (!$scope.threads[current]) {
+                    $scope.threads[current] = {
+                        id: current,
+                        parent: parent,
+                        message: '-',
+                        application: 'Unknown application',
+                        context: [],
+                        date: new Date()
+                    }
+                }
+            }
+
+            $scope.threads[thread.id] = thread;
             $scope.$apply();
         });
     });

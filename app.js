@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 app.post('/threads', function(req, res){
-    if (!req.body.id) {
+    if (!req.body.path) {
         return res.status(400).end();
     }
 
