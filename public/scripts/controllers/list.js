@@ -15,6 +15,28 @@ angular
             thread.parent = paths[paths.length-2];
             thread.children = {};
 
+            var levelMap = {
+                'primary': 'primary',
+                'default': 'default',
+
+                'debug': 'info',
+                'info': 'info',
+                'notice': 'info',
+
+                'warning': 'warning',
+
+                'error': 'danger',
+                'critical': 'danger',
+                'alert': 'danger',
+                'emergency': 'danger'
+            };
+
+            if (levelMap[thread.level]) {
+                thread.level = levelMap[thread.level];
+            } else {
+                thread.level = 'info';
+            }
+
             for (var i = 1; i < paths.length - 1; i++) {
                 var parent = paths[i];
 
