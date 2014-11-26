@@ -6,10 +6,10 @@
     <div class="panel-body">
         {{ thread.message }}
 
-        <div ng-if="findByParent(thread.id)">
+        <div ng-show="Utils.keys(thread.children).length">
             <hr />
             <ul style="list-style: none">
-                <li ng-repeat="thread in findByParent(thread.id)" ng-include="'views/thread.html'"></li>
+                <li ng-repeat="thread in thread.children" ng-include="'views/thread.html'"></li>
             </ul>
         </div>
     </div>
