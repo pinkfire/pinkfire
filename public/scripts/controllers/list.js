@@ -28,7 +28,8 @@ angular
                 'error': 'danger',
                 'critical': 'danger',
                 'alert': 'danger',
-                'emergency': 'danger'
+                'emergency': 'danger',
+                'danger': 'danger'
             };
 
             if (levelMap[thread.level]) {
@@ -45,6 +46,7 @@ angular
                         id: parent,
                         parent: paths[i-1],
                         message: '-',
+                        level: 'info',
                         application: 'Unknown application',
                         context: [],
                         date: new Date(),
