@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -18,6 +19,6 @@ app.post('/threads', function(req, res){
     res.status(201).end();
 });
 
-http.listen(3000, function(){
-    console.log('listening on *:3000');
+http.listen(port, function(){
+    console.log('listening on *:'+port);
 });
