@@ -8,11 +8,22 @@
 
     <style>
         body {
-            padding-top: 20px;
+            padding-top: 70px;
         }
     </style>
 </head>
 <body ng-app="sossoaApp">
+
+    <nav ng-controller="NavbarCtrl" class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SOS-SOA</a>
+            </div>
+
+            <button type="button" ng-click="clear()" class="btn btn-danger navbar-btn">Clear</button>
+        </div>
+    </nav>
+
     <div ng-view></div>
 
     <script src="vendor/jquery/dist/jquery.min.js"></script>
@@ -23,5 +34,7 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/list.js"></script>
+    <script src="scripts/controllers/navbar.js"></script>
+    <script src="scripts/models/thread.js"></script>
 </body>
 </html>
