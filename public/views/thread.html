@@ -1,13 +1,16 @@
 <div class="panel panel-{{ thread.level }}">
-    <div class="panel-heading">
-        {{ thread.application }} <span class="pull-right">{{ thread.id }}</span>
+    <div class="panel-heading" ng-click="toggle(thread.id)">
+        <div class="row">
+            <div class="col-md-2">
+                {{ thread.application }}
+                <i ng-show="Utils.keys(thread.children).length">({{ Utils.keys(thread.children).length }})</i>
+            </div>
+            <div class="col-md-10">{{ thread.message }}</div>
+        </div>
     </div>
 
-    <div class="panel-body">
-        {{ thread.message }}
-
+    <div class="panel-body" id="thread-{{ thread.id }}" style="display: none;">
         <div ng-show="Utils.keys(thread.children).length">
-            <hr />
             <ul style="list-style: none">
                 <li ng-repeat="thread in thread.children" ng-include="'views/thread.html'"></li>
             </ul>
