@@ -56,7 +56,7 @@ angular.module('sossoaApp')
                             level: 'info',
                             application: 'Unknown application',
                             context: [],
-                            date: new Date(),
+                            date: Math.floor(Date.now() / 1000),
                             children: {}
                         };
                     }

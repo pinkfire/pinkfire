@@ -2,7 +2,8 @@
 
 angular
     .module('sossoaApp', [
-        'ngRoute'
+        'ngRoute',
+        'ui.bootstrap'
     ])
     .config(function($routeProvider) {
         $routeProvider

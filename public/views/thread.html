@@ -5,12 +5,20 @@
                 {{ thread.application }}
                 <i ng-show="Utils.keys(thread.children).length">({{ Utils.keys(thread.children).length }})</i>
             </div>
-            <div class="col-md-10">{{ thread.message }}</div>
+            <div class="col-md-8">{{ thread.message }}</div>
+            <div class="col-md-2">{{ thread.date | date:'medium' }}</div>
         </div>
     </div>
 
     <div class="panel-body" id="thread-{{ thread.id }}" style="display: none;">
+        <tabset>
+            <tab ng-repeat="(key, context) in thread.context" heading="{{ key }}">
+                <pre>{{ context | json }}</pre>
+            </tab>
+        </tabset>
+
         <div ng-show="Utils.keys(thread.children).length">
+            <hr />
             <ul style="list-style: none">
                 <li ng-repeat="thread in thread.children" ng-include="'views/thread.html'"></li>
             </ul>
