@@ -11,14 +11,16 @@
     </div>
 
     <div class="panel-body" id="thread-{{ thread.id }}" style="display: none;">
-        <tabset>
+        <tabset ng-show="Utils.keys(thread.context).length">
             <tab ng-repeat="(key, context) in thread.context" heading="{{ key }}">
                 <pre>{{ context | json }}</pre>
             </tab>
         </tabset>
 
+        <hr ng-show="Utils.keys(thread.context).length && Utils.keys(thread.children).length" />
+
         <div ng-show="Utils.keys(thread.children).length">
-            <hr />
+
             <ul style="list-style: none">
                 <li ng-repeat="thread in thread.children" ng-include="'views/thread.html'"></li>
             </ul>
