@@ -1,11 +1,12 @@
 <div class="panel panel-{{ thread.level }}">
     <div class="panel-heading" ng-click="toggle(thread.id)">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 {{ thread.application }}
                 <i ng-show="Utils.keys(thread.children).length">({{ Utils.keys(thread.children).length }})</i>
+                <span class="label label-default" ng-hide="$root.by_channel">{{ thread.channel }}</span>
             </div>
-            <div class="col-md-8">{{ thread.message }}</div>
+            <div class="col-md-7">{{ thread.message }}</div>
             <div class="col-md-2">{{ thread.date | date:'medium' }}</div>
         </div>
     </div>

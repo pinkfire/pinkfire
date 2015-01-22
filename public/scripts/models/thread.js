@@ -2,9 +2,14 @@
 
 angular.module('sossoaApp')
     .factory('ThreadRepository', function() {
+        var channels = [];
         var threads = {};
 
         return {
+            channels: function () {
+                return channels;
+            },
+
             all: function() {
                 return threads;
             },
@@ -13,7 +18,19 @@ angular.module('sossoaApp')
                 threads = {};
             },
 
+            addChannel: function(channel) {
+                console.log(channel);
+                if (channels.indexOf(channel) == -1 && angular.isDefined(channel)) {
+                    channels.push(channel);
+                }
+            },
+
             add: function(thread) {
+
+                if (channels.indexOf(thread.channel) == -1 && angular.isDefined(thread.channel)) {
+                    channels.push(thread.channel);
+                }
+
                 var paths = thread.path.split('/'),
                     parentThread = threads;
 

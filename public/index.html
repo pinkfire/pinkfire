@@ -4,23 +4,30 @@
     <title>SOS-SOA</title>
 
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.min.css">
 
-    <style>
-        body {
-            padding-top: 70px;
-        }
-    </style>
+    <style>body {padding-top: 70px;} .navbar-brand{padding: 10px 15px;}</style>
 </head>
 <body ng-app="sossoaApp">
 
     <nav ng-controller="NavbarCtrl" class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">SOS-SOA</a>
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" width="30" height="30" src="assets/pinkfire.png">
+                </a>
             </div>
 
-            <button type="button" ng-click="clear()" class="btn btn-danger navbar-btn">Clear</button>
+
+                <ul class="nav navbar-nav">
+                    <li><a href="#/">All channels</a></li>
+                    <li ng-repeat="channel in channels" ng-class="(channel==$root.by_channel) ? 'active' : ''">
+                        <a href="#/{{ channel}}">{{ channel }}</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li><button type="button" class="btn btn-danger navbar-btn" ng-click="clear()">Clear</button></li>
+                </ul>
+
         </div>
     </nav>
 
@@ -29,6 +36,7 @@
     <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-route/angular-route.min.js"></script>
+    <script src="vendor/ngstorage/ngStorage.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>

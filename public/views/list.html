@@ -1,3 +1,3 @@
 <div class="container-fluid">
-    <div ng-repeat="thread in threads.all() | orderObjectBy:'date':true" ng-include="'views/thread.html'"></div>
+    <div ng-repeat="thread in threads.all() | orderObjectBy:'date':true | filter:{ channel: by_channel }" ng-include="'views/thread.html'"></div>
 </div>

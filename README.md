@@ -1,21 +1,17 @@
-sos-soa
-=======
+# pinkfire
 
-ABOUT
------
+## ABOUT
 
-sos-soa is a small tool to help debugging SOA (Service Oriented Architecture) by centralizing logs.
+pinkfire is a great tool to help debugging SOA (Service Oriented Architecture) by centralizing logs.
 
-INSTALL
--------
+## INSTALL
 
 ```
 npm install
 bower install
 ```
 
-USE
----
+## USE
 
 ```
 node app.js

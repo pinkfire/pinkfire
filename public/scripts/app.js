@@ -7,7 +7,7 @@ angular
     ])
     .config(function($routeProvider) {
         $routeProvider
-            .when('/', {
+            .when('/:by_channel?', {
                 templateUrl: 'views/list.html',
                 controller: 'ListCtrl'
             })
@@ -28,8 +28,8 @@ angular
             return filtered;
         };
     })
-    .run(function($rootScope){
+    .run(function($rootScope) {
         $rootScope.Utils = {
             keys : Object.keys
-        }
+        };
     });
