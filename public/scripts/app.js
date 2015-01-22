@@ -3,7 +3,8 @@
 angular
     .module('sossoaApp', [
         'ngRoute',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'ngPrettyJson'
     ])
     .config(function($routeProvider) {
         $routeProvider
