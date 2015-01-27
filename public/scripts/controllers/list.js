@@ -12,8 +12,14 @@ angular.module('sossoaApp')
         };
 
         var socket = io();
-        socket.on('threads', function(thread) {
+
+        socket.on('/threads/post', function(thread) {
             ThreadRepository.add(thread);
+            $scope.$apply();
+        });
+
+        socket.on('/threads/patch', function(thread) {
+            ThreadRepository.update(thread);
             $scope.$apply();
         });
     });
