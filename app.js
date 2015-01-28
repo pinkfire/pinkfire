@@ -14,9 +14,19 @@ app.post('/threads', function(req, res){
         return res.status(400).end();
     }
 
-    io.emit('threads', req.body);
+    io.emit('/threads/post', req.body);
 
     res.status(201).end();
+});
+
+app.patch('/threads', function(req, res) {
+    if (!req.body.path) {
+        return res.status(400).end();
+    }
+
+    io.emit('/threads/patch', req.body);
+
+    res.status(200).end();
 });
 
 http.listen(port, function(){

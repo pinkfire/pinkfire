@@ -19,7 +19,6 @@ angular.module('sossoaApp')
             },
 
             addChannel: function(channel) {
-                console.log(channel);
                 if (channels.indexOf(channel) == -1 && angular.isDefined(channel)) {
                     channels.push(channel);
                 }
@@ -86,6 +85,19 @@ angular.module('sossoaApp')
                 }
 
                 parentThread[thread.id] = thread;
+            },
+
+            update: function(threadPatch) {
+                var parentThread = threads,
+                    paths = threadPatch.path.split('/'),
+                    id = paths[paths.length-1];
+
+                for (var i = 1; i < paths.length - 1; i++) {
+                    var parent = paths[i];
+                    parentThread = parentThread[parent].children;
+                }
+
+                $.extend(true, parentThread[id], threadPatch);
             }
         }
     });
