@@ -61,6 +61,11 @@ angular.module('sossoaApp')
                     thread.level = 'info';
                 }
 
+                // retrocompatibility with SosSoaBundle
+                if (typeof thread.links === 'undefined') {
+                    thread.links = {};
+                }
+
                 for (var i = 1; i < paths.length - 1; i++) {
                     var parent = paths[i];
 
@@ -73,7 +78,8 @@ angular.module('sossoaApp')
                             application: 'Unknown application',
                             context: [],
                             date: Math.floor(Date.now() / 1000),
-                            children: {}
+                            children: {},
+                            links: {}
                         };
                     }
 

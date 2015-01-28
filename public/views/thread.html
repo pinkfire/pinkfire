@@ -12,16 +12,27 @@
     </div>
 
     <div class="panel-body" id="thread-{{ thread.id }}" style="display: none;">
-        <tabset ng-show="Utils.keys(thread.context).length">
-            <tab ng-repeat="(key, context) in thread.context" heading="{{ key }}">
-                <pre pretty-json="context" />
-            </tab>
-        </tabset>
+        <div class="row">
+            <div ng-class="{'col-lg-10': Utils.keys(thread.links).length, 'col-lg-12': !Utils.keys(thread.links).length}">
+                <tabset ng-show="Utils.keys(thread.context).length">
+                    <tab ng-repeat="(key, context) in thread.context" heading="{{ key }}">
+                        <pre pretty-json="context" />
+                    </tab>
+                </tabset>
+            </div>
+
+            <div ng-if="Utils.keys(thread.links).length" class="col-lg-2">
+                <tabset>
+                    <tab heading="Links">
+                        <li ng-repeat="(name, link) in thread.links"><a target="_blank" href="{{ link }}">{{ name }}</a></li>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
 
         <hr ng-show="Utils.keys(thread.context).length && Utils.keys(thread.children).length" />
 
         <div ng-show="Utils.keys(thread.children).length">
-
             <ul style="list-style: none">
                 <li ng-repeat="thread in thread.children" ng-include="'views/thread.html'"></li>
             </ul>
