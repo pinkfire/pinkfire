@@ -8,7 +8,6 @@ pinkfire is a great tool to help debugging SOA (Service Oriented Architecture) b
 
 ```
 npm install
-bower install
 ```
 
 ## USE
