@@ -77,7 +77,7 @@ angular.module('sossoaApp')
                             level: 'info',
                             application: 'Unknown application',
                             context: [],
-                            date: Math.floor(Date.now() / 1000),
+                            date: new Date(),
                             children: {},
                             links: {}
                         };
@@ -102,6 +102,8 @@ angular.module('sossoaApp')
                     var parent = paths[i];
                     parentThread = parentThread[parent].children;
                 }
+
+                threadPatch.date = new Date();
 
                 $.extend(true, parentThread[id], threadPatch);
             }
