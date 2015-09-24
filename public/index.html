@@ -19,12 +19,15 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="#/">All channels</a></li>
-                <li ng-repeat="channel in channels" ng-class="(channel==$root.by_channel) ? 'active' : ''">
+                <li ng-repeat="channel in threads.channels()" ng-class="(channel==$root.by_channel) ? 'active' : ''">
                     <a href="#/{{ channel}}">{{ channel }}</a>
+                </li>
+                <li ng-class="$root.hide_debug ? 'active' : ''" ng-show="threads.withDebug()">
+                    <a href ng-click="toggleDebug()">Hide debug threads</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><button type="button" class="btn btn-danger navbar-btn" ng-click="clear()">Clear</button></li>
+                <li><button type="button" class="btn btn-danger navbar-btn" ng-click="threads.clear()">Clear</button></li>
             </ul>
         </div>
     </nav>

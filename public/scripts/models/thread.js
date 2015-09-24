@@ -4,9 +4,15 @@ angular.module('sossoaApp')
     .factory('ThreadRepository', function() {
         var channels = [];
         var threads = {};
+        var hiddenPrefix = "_pinkfire_";
+        var withDebugThreads = false;
 
         return {
-            channels: function () {
+            withDebug: function() {
+                return withDebugThreads;
+            },
+
+            channels: function() {
                 return channels;
             },
 
@@ -16,6 +22,7 @@ angular.module('sossoaApp')
 
             clear: function() {
                 threads = {};
+                withDebugThreads = false;
             },
 
             addChannel: function(channel) {
@@ -37,6 +44,19 @@ angular.module('sossoaApp')
                 thread.id = paths[paths.length-1];
                 thread.parent = paths[paths.length-2];
                 thread.children = {};
+                thread.hidden = {};
+
+                // Remove hidden keys from thread context
+                angular.forEach(thread.context, function(value, key) {
+                    if (key.substring(0, hiddenPrefix.length) === hiddenPrefix) {
+                        thread.hidden[key.substring(hiddenPrefix.length)] = value;
+                        delete thread.context[key];
+                    }
+                });
+
+                if (thread.hidden.is_debug) {
+                    withDebugThreads = true;
+                }
 
                 var levelMap = {
                     'primary': 'primary',

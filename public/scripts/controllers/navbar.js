@@ -2,10 +2,9 @@
 
 angular.module('sossoaApp')
     .controller('NavbarCtrl', function($rootScope, $scope, ThreadRepository) {
+        $scope.threads = ThreadRepository;
 
-        $scope.clear = function() {
-            ThreadRepository.clear();
+        $scope.toggleDebug = function() {
+            $rootScope.hide_debug = !$rootScope.hide_debug;
         };
-
-        $scope.channels = ThreadRepository.channels();
     });
