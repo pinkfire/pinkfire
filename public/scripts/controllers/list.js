@@ -23,6 +23,10 @@ angular.module('sossoaApp')
             $('#thread-'+id).slideToggle();
         };
 
+        $scope.isString = function(data) {
+            return (typeof data === 'string');
+        };
+
         var socket = io();
 
         socket.on('/threads/post', function(thread) {
