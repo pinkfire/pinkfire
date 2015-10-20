@@ -2,8 +2,8 @@
     <div class="panel-heading" ng-click="toggle(thread.id)">
         <div class="row">
             <div class="col-md-3">
-                {{ thread.application }}
-                <i ng-show="Utils.keys(thread.children).length">({{ Utils.keys(thread.children).length }})</i>
+                <span class="label label-default">{{ thread.application }}</span>
+                <i ng-show="Utils.keys(thread.children).length" class="badge">{{ Utils.keys(thread.children).length }}</i>
                 <span class="label label-default" ng-hide="$root.by_channel || thread.parent">{{ thread.channel }}</span>
             </div>
             <div class="col-md-7">{{ thread.message }}</div>
@@ -16,7 +16,10 @@
             <div ng-class="{'col-lg-10': Utils.keys(thread.links).length, 'col-lg-12': !Utils.keys(thread.links).length}">
                 <tabset ng-show="Utils.keys(thread.context).length">
                     <tab ng-repeat="(key, context) in thread.context" heading="{{ key }}">
-                        <pre pretty-json="context" />
+                        <span ng-switch on="isString(context)">
+                            <pre ng-switch-when="false" pretty-json="context" />
+                            <pre ng-switch-default>{{ context }}</pre>
+                        </span>
                     </tab>
                 </tabset>
             </div>
