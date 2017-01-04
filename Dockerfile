@@ -1,5 +1,8 @@
 FROM node:7-alpine
 
+RUN apk add --update git \
+    && rm -rf /var/cache/apk/*
+
 COPY ./ /usr/src/
 
 WORKDIR /usr/src/
