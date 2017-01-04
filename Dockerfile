@@ -1,10 +1,8 @@
-FROM node:latest
+FROM node:7-alpine
 
 COPY ./ /usr/src/
 
 WORKDIR /usr/src/
-
-RUN ls -l
 
 RUN npm install --ignore-scripts && ./node_modules/bower/bin/bower install --allow-root --config.interactive=false
 
