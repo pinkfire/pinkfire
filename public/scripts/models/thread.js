@@ -31,6 +31,33 @@ angular.module('sossoaApp')
                 }
             },
 
+            normalizeLevel: function (thread) {
+                var levelMap = {
+                    'primary': 'primary',
+                    'default': 'default',
+                    'success': 'success',
+                    'redirection': 'warning',
+
+                    'debug': 'info',
+                    'info': 'info',
+                    'notice': 'info',
+
+                    'warning': 'warning',
+
+                    'error': 'danger',
+                    'critical': 'danger',
+                    'alert': 'danger',
+                    'emergency': 'danger',
+                    'danger': 'danger'
+                };
+
+                if (levelMap[thread.level]) {
+                    thread.level = levelMap[thread.level];
+                } else {
+                    thread.level = 'info';
+                }
+            },
+
             add: function(thread) {
 
                 if (channels.indexOf(thread.channel) == -1 && angular.isDefined(thread.channel)) {
@@ -58,28 +85,7 @@ angular.module('sossoaApp')
                     withDebugThreads = true;
                 }
 
-                var levelMap = {
-                    'primary': 'primary',
-                    'default': 'default',
-
-                    'debug': 'info',
-                    'info': 'info',
-                    'notice': 'info',
-
-                    'warning': 'warning',
-
-                    'error': 'danger',
-                    'critical': 'danger',
-                    'alert': 'danger',
-                    'emergency': 'danger',
-                    'danger': 'danger'
-                };
-
-                if (levelMap[thread.level]) {
-                    thread.level = levelMap[thread.level];
-                } else {
-                    thread.level = 'info';
-                }
+                this.normalizeLevel(thread);
 
                 // retrocompatibility with SosSoaBundle
                 if (typeof thread.links === 'undefined') {
@@ -124,6 +130,10 @@ angular.module('sossoaApp')
                 }
 
                 threadPatch.date = new Date();
+
+                if (threadPatch.level) {
+                    this.normalizeLevel(threadPatch);
+                }
 
                 $.extend(true, parentThread[id], threadPatch);
             }
